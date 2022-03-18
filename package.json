@@ -1,0 +1,21 @@
+{
+  "name": "jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:custom": "jest --config ./jest.custom.config.js -u",
+    "a": "jest --config ./jest.custom.config.js -u"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "jest-spec-reporter": "^1.0.17",
+    "playwright": "^1.19.2"
+  }
+}
