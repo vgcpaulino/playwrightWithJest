@@ -10,6 +10,7 @@ const { Test,
 } = require('jest-runner');
 
 const playwright = require('playwright');
+const { cpuUsage } = require('process');
 
 // nodes_modules/jest-runner/build/index.js
 class CustomRunner extends JestRunner {
@@ -24,6 +25,11 @@ class CustomRunner extends JestRunner {
 
         this.playwrightServerTypes = [];
         this.playwrightServers = {};
+        // console.log(process.memoryUsage());
+
+        
+        this.startUsage = cpuUsage();
+        console.log(this.startUsage);
     }
 
     /**
@@ -81,6 +87,8 @@ class CustomRunner extends JestRunner {
         await this.playwrightBrowsers['chromium'].close();
         await this.playwrightBrowsers['firefox'].close();
         await this.playwrightBrowsers['webkit'].close();
+
+        console.log(cpuUsage(this.startUsage));
     }
 
 

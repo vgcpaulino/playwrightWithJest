@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:custom": "jest --config ./jest.custom.config.js -u",
-    "a": "jest --config ./jest.custom.config.js -u"
+    "a": "jest --config ./jest.custom.config.js -u",
+    "b": "node --expose-gc ./node_modules/.bin/jest --config ./jest.custom.config.js --logHeapUsage"
   },
   "keywords": [],
   "author": "",
