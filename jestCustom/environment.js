@@ -16,18 +16,20 @@ class CustomEnvironment extends NodeEnvironment {
     this.contextOptions = this.globals.contextOptions;
 
     /** @type {import('playwright').Browser} */
-    this.global.browser;
+    this.global.browser = this.globals.browser;
     /** @type {import('playwright').BrowserContext} */
     this.global.context;
     /** @type {import('playwright').Page} */
     this.global.page;
 
     this.debug = false;
+    console.log(process.memoryUsage().heapUsed);
   }
 
   async setup() {
     await super.setup();
-    await this.launchBrowser();
+    // TODO: SERVER VS BROWSER;
+    // await this.launchBrowser();
 
     this.global.configPlaywright = {
       browser: async () => this.setupBrowser(),
@@ -81,7 +83,8 @@ class CustomEnvironment extends NodeEnvironment {
 
   async setupBrowser() {
     // Browsers;
-    if (!this.global.browser || this.debug) await this.launchBrowser();
+    // TODO: SERVER VS BROWSER;
+    // if (!this.global.browser || this.debug) await this.launchBrowser();
     // Context;
     this.global.context = await this.global.browser.newContext();
     // this.global.context = await this.globals.chromiumBrowser.newContext();

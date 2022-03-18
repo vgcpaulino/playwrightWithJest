@@ -5,7 +5,8 @@ const executionConfig = require('./execution.config');
 const projects = getProjects(executionConfig.playwrightConfig.browserSetups);
 
 module.exports = {
-    reporters: ['jest-spec-reporter'],
+    // reporters: ['jest-spec-reporter'],
+    // reporters: ["default", "jest-bench/reporter"],
     
     projects,
     // projects: [

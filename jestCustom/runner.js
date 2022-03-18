@@ -59,22 +59,28 @@ class CustomRunner extends JestRunner {
             }
         }
 
-        await this.launchPlaywrightServers(this.playwrightServerTypes);
-
-        // const chromiumBrowser = await playwright['chromium'].launch();
-        // const firefoxBrowser = await playwright['firefox'].launch();
-        // const webKitBrowser = await playwright['webkit'].launch();
+        // TODO: SERVER VS BROWSER;
+        // await this.launchPlaywrightServers(this.playwrightServerTypes);
+        this.playwrightBrowsers = {
+            'chromium': await playwright['chromium'].launch(),
+            'firefox':  await playwright['firefox'].launch(),
+            'webkit': await playwright['webkit'].launch(),
+        };
+        const a = this.playwrightBrowsers['chrome'];
         tests.forEach(test => {
             const type = test.context.config.globals.browserType;
-            test.context.config.globals['browserServerWebSocket'] = this.playwrightServers[type].webSocket;
-            // test.context.config.globals['chromiumBrowser'] = chromiumBrowser;
-            // test.context.config.globals['firefoxBrowser'] = firefoxBrowser;
-            // test.context.config.globals['webKitBrowser'] = webKitBrowser;
+            // TODO: SERVER VS BROWSER;
+            // test.context.config.globals['browserServerWebSocket'] = this.playwrightServers[type].webSocket;
+            test.context.config.globals['browser'] = this.playwrightBrowsers[type];
         });
 
         await super.runTests(tests, watcher, onStart, onResult, onFailure, options);
 
-        await this.closePlaywrightServers();
+        // TODO: SERVER VS BROWSER;
+        // await this.closePlaywrightServers();
+        await this.playwrightBrowsers['chromium'].close();
+        await this.playwrightBrowsers['firefox'].close();
+        await this.playwrightBrowsers['webkit'].close();
     }
 
 
